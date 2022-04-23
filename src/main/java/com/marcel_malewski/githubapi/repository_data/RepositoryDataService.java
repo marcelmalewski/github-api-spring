@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.http.HttpResponse;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -21,7 +22,8 @@ public class RepositoryDataService extends GithubService {
                 //get languages as json
                 HttpResponse<String> response = getResponseFromLink(languagesUrl);
                 //convert json to map of languages
-                Map<String, Integer> mappedLanguages = this.mapper.readValue(response.body(), new TypeReference<>() {});
+                Map<String, Integer> mappedLanguages = this.mapper.readValue(response.body(), new TypeReference<>() {
+                });
                 //add hashmap with languages to specific repositoryData
                 repositoryData.setLanguages(mappedLanguages);
             } catch (URISyntaxException | IOException | InterruptedException e) {
@@ -31,13 +33,41 @@ public class RepositoryDataService extends GithubService {
 
         return repositoriesData;
     }
+
     public List<RepositoryData> getRepositoriesDataOfGithubUser(String githubUserName) throws IOException, URISyntaxException, InterruptedException {
-        String repositoriesUrl = String.format("https://api.github.com/users/%s/repos", githubUserName);
-        //Now with our link and githubUserName get response with user data
-        HttpResponse<String> response = getResponseFromLink(repositoriesUrl);
-        //then convert body to object
-        List<RepositoryData> repositoriesData = this.mapper.readValue(response.body(), new TypeReference<>() {});
-        //now refill languages
-        return addLanguagesToRepositoriesData(repositoriesData, githubUserName);
+        String githubUserInfoUrl = String.format("https://api.github.com/users/%s", githubUserName);
+        //get data about githubUser from url
+        HttpResponse<String> responseWithGithubUserData = getResponseFromLink(githubUserInfoUrl);
+        //change json to object with number of public repos
+        GithubUserWithNumberOfPublicRepos githubUserWithNumberOfPublicRepos = this.mapper.readValue(responseWithGithubUserData.body(), GithubUserWithNumberOfPublicRepos.class);
+
+        int numberOfPages = githubUserWithNumberOfPublicRepos.getPublic_repos();
+        //from github api i can get max 100 repos in one request
+        if (numberOfPages > 100) {
+            ArrayList<RepositoryData> AllRepositoriesData = new ArrayList<>();
+
+            //now get every page
+            for (int i = 1; i <= numberOfPages; i++) {
+                String repositoriesUrlWithPages = String.format("https://api.github.com/users/%s/repos?page=%o&per_page=100", githubUserName, i);
+
+                HttpResponse<String> response = getResponseFromLink(repositoriesUrlWithPages);
+
+                List<RepositoryData> repositoriesData = this.mapper.readValue(response.body(), new TypeReference<>() {
+                });
+
+                AllRepositoriesData.addAll(repositoriesData);
+            }
+
+            //now refill languages
+            return addLanguagesToRepositoriesData(AllRepositoriesData, githubUserName);
+        } else {
+            //if number of repos is less than 100 we need only one request
+            String repositoriesUrl = String.format("https://api.github.com/users/%s/repos?per_page=100", githubUserName);
+            HttpResponse<String> response = getResponseFromLink(repositoriesUrl);
+            List<RepositoryData> repositoriesData = this.mapper.readValue(response.body(), new TypeReference<>() {});
+
+            //now refill languages
+            return addLanguagesToRepositoriesData(repositoriesData, githubUserName);
+        }
     }
 }

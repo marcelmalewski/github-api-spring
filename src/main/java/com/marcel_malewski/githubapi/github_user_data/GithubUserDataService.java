@@ -20,7 +20,7 @@ public class GithubUserDataService extends GithubService {
         this.repositoryDataService = repositoryDataService;
     }
 
-    private Map<String, Integer> addAggregatedLanguagesByBytes(List<RepositoryData> repositoriesData) {
+    private Map<String, Integer> aggregateLanguagesByBytes(List<RepositoryData> repositoriesData) {
         //hashmap to store aggregated languages by bytes
         Map<String, Integer> allLanguages = new HashMap<>();
 
@@ -50,7 +50,7 @@ public class GithubUserDataService extends GithubService {
         //get repositories of user
         List<RepositoryData> repositoriesData = repositoryDataService.getRepositoriesDataOfGithubUser(githubUserName);
         //aggregate languages in repositories by bytes
-        Map<String, Integer> allLanguages = addAggregatedLanguagesByBytes(repositoriesData);
+        Map<String, Integer> allLanguages = aggregateLanguagesByBytes(repositoriesData);
 
         GithubUserData githubUserData = this.mapper.readValue(response.body(), GithubUserData.class);
         //refill languages with aggregated languages by bytes
