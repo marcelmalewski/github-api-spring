@@ -17,7 +17,6 @@ public class GithubUserDataController {
     }
 
     @GetMapping
-    // moze jakies inne handlowanie errow lepsze?
     public GithubUserData getGithubUserData(@PathVariable String githubUserName) throws IOException, InterruptedException, URISyntaxException {
         return githubUserDataService.getGithubUserData(githubUserName);
     }

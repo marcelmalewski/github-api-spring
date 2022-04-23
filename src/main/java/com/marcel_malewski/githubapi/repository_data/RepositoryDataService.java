@@ -18,9 +18,11 @@ public class RepositoryDataService extends GithubService {
             String languagesUrl = String.format("https://api.github.com/repos/%s/%s/languages", githubUserName, repositoryData.getName());
 
             try {
+                //get languages as json
                 HttpResponse<String> response = getResponseFromLink(languagesUrl);
+                //convert json to map of languages
                 Map<String, Integer> mappedLanguages = this.mapper.readValue(response.body(), new TypeReference<>() {});
-                //now we have hashmap with languages, and we can add it to repositoryData
+                //add hashmap with languages to specific repositoryData
                 repositoryData.setLanguages(mappedLanguages);
             } catch (URISyntaxException | IOException | InterruptedException e) {
                 throw new RuntimeException(e);
@@ -30,11 +32,12 @@ public class RepositoryDataService extends GithubService {
         return repositoriesData;
     }
     public List<RepositoryData> getRepositoriesDataOfGithubUser(String githubUserName) throws IOException, URISyntaxException, InterruptedException {
-        String repositoriesUrl = String.format("https://api.github.com/users/%s/repos", githubUserName);
-        //Now with our link and githubUserName we get response
+        String repositoriesUrl = String.format("https://api.dsgithub.com/users/%s/repos", githubUserName);
+        //Now with our link and githubUserName get response with user data
         HttpResponse<String> response = getResponseFromLink(repositoriesUrl);
+        //then convert body to object
         List<RepositoryData> repositoriesData = this.mapper.readValue(response.body(), new TypeReference<>() {});
-
+        //now refill languages
         return addLanguagesToRepositoriesData(repositoriesData, githubUserName);
     }
 }

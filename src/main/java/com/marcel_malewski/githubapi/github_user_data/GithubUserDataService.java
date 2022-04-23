@@ -6,9 +6,7 @@ import com.marcel_malewski.githubapi.repository_data.RepositoryDataService;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.HashMap;
 import java.util.List;
@@ -23,12 +21,15 @@ public class GithubUserDataService extends GithubService {
     }
 
     private Map<String, Integer> addAggregatedLanguagesByBytes(List<RepositoryData> repositoriesData) {
+        //hashmap to store aggregated languages by bytes
         Map<String, Integer> allLanguages = new HashMap<>();
 
         repositoriesData.forEach(repositoryData -> {
+            //for every repositoryData create map from languages
             Map<String, Integer> repositoryLanguages = repositoryData.getLanguages();
 
             for (Map.Entry<String, Integer> entry : repositoryLanguages.entrySet()) {
+                //if languages is already in allLanguages we sum bytes
                 if (allLanguages.containsKey(entry.getKey())) {
                     int updatedValue = entry.getValue() + allLanguages.get(entry.getKey());
 
@@ -44,14 +45,15 @@ public class GithubUserDataService extends GithubService {
 
     public GithubUserData getGithubUserData(String githubUserName) throws IOException, InterruptedException, URISyntaxException {
         String githubUserUrl = String.format("https://api.github.com/users/%s", githubUserName);
-
+        //Now with our link and githubUserName get response with user data
         HttpResponse<String> response = getResponseFromLink(githubUserUrl);
-
+        //get repositories of user
         List<RepositoryData> repositoriesData = repositoryDataService.getRepositoriesDataOfGithubUser(githubUserName);
-
+        //aggregate languages in repositories by bytes
         Map<String, Integer> allLanguages = addAggregatedLanguagesByBytes(repositoriesData);
 
         GithubUserData githubUserData =  this.mapper.readValue(response.body(), GithubUserData.class);
+        //refill languages with aggregated languages by bytes
         githubUserData.setLanguages(allLanguages);
 
         return githubUserData;
