@@ -52,7 +52,7 @@ public class GithubUserDataService extends GithubService {
         //aggregate languages in repositories by bytes
         Map<String, Integer> allLanguages = addAggregatedLanguagesByBytes(repositoriesData);
 
-        GithubUserData githubUserData =  this.mapper.readValue(response.body(), GithubUserData.class);
+        GithubUserData githubUserData = this.mapper.readValue(response.body(), GithubUserData.class);
         //refill languages with aggregated languages by bytes
         githubUserData.setLanguages(allLanguages);
 

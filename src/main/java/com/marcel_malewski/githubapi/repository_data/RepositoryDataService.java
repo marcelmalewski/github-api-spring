@@ -32,7 +32,7 @@ public class RepositoryDataService extends GithubService {
         return repositoriesData;
     }
     public List<RepositoryData> getRepositoriesDataOfGithubUser(String githubUserName) throws IOException, URISyntaxException, InterruptedException {
-        String repositoriesUrl = String.format("https://api.dsgithub.com/users/%s/repos", githubUserName);
+        String repositoriesUrl = String.format("https://api.github.com/users/%s/repos", githubUserName);
         //Now with our link and githubUserName get response with user data
         HttpResponse<String> response = getResponseFromLink(repositoriesUrl);
         //then convert body to object

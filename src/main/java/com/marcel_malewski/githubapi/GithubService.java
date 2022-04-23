@@ -2,6 +2,8 @@ package com.marcel_malewski.githubapi;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
 import java.net.URI;
@@ -21,6 +23,14 @@ public abstract class GithubService {
                 .header("Accept", "application/vnd.github.v3+json")
                 .uri(new URI(url))
                 .build();
-        return this.client.send(request, HttpResponse.BodyHandlers.ofString());
+        HttpResponse<String> response = this.client.send(request, HttpResponse.BodyHandlers.ofString());
+        //handle when githubUser is not found
+        if(response.statusCode() == 404) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    "GithubUser not found"
+            );
+        }
+        return response;
     }
 }
