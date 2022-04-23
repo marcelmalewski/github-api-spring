@@ -16,7 +16,7 @@ public class RepositoryDataService extends GithubService {
         repositoriesData.forEach(repositoryData -> {
             //first create link to get languages of specific repository
             String languagesUrl = String.format("https://api.github.com/repos/%s/%s/languages", githubUserName, repositoryData.getName());
-            
+
             try {
                 HttpResponse<String> response = getResponseFromLink(languagesUrl);
                 Map<String, Integer> mappedLanguages = this.mapper.readValue(response.body(), new TypeReference<>() {});
