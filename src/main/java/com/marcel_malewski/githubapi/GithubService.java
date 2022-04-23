@@ -17,7 +17,6 @@ public abstract class GithubService {
     protected final ObjectMapper mapper = new ObjectMapper()
             .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-    //moge zrobic z tego abstract method
     protected HttpResponse<String> getResponseFromLink(String url) throws URISyntaxException, IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
@@ -34,7 +33,7 @@ public abstract class GithubService {
         }
         else if(response.statusCode() == 403) {
             throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND,
+                    HttpStatus.TOO_MANY_REQUESTS,
                     "API Rate limit exceeded"
             );
         }

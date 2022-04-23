@@ -15,12 +15,11 @@ import java.util.Map;
 public class RepositoryDataService extends GithubService {
     private List<RepositoryData> addLanguagesToRepositoriesData(List<RepositoryData> repositoriesData, String githubUserName) {
         repositoriesData.forEach(repositoryData -> {
-            //first create link to get languages of specific repository
-            String languagesUrl = String.format("https://api.github.com/repos/%s/%s/languages", githubUserName, repositoryData.getName());
+            String repoLanguagesUrl = String.format("https://api.github.com/repos/%s/%s/languages", githubUserName, repositoryData.getName());
 
             try {
                 //get languages as json
-                HttpResponse<String> response = getResponseFromLink(languagesUrl);
+                HttpResponse<String> response = getResponseFromLink(repoLanguagesUrl);
                 //convert json to map of languages
                 Map<String, Integer> mappedLanguages = this.mapper.readValue(response.body(), new TypeReference<>() {
                 });
@@ -36,7 +35,7 @@ public class RepositoryDataService extends GithubService {
 
     public List<RepositoryData> getRepositoriesDataOfGithubUser(String githubUserName) throws IOException, URISyntaxException, InterruptedException {
         String githubUserInfoUrl = String.format("https://api.github.com/users/%s", githubUserName);
-        //get data about githubUser from url
+        //get data about githubUser as json
         HttpResponse<String> responseWithGithubUserData = getResponseFromLink(githubUserInfoUrl);
         //change json to object with number of public repos
         GithubUserWithNumberOfPublicRepos githubUserWithNumberOfPublicRepos = this.mapper.readValue(responseWithGithubUserData.body(), GithubUserWithNumberOfPublicRepos.class);
@@ -49,7 +48,6 @@ public class RepositoryDataService extends GithubService {
             //now get every page
             for (int i = 1; i <= numberOfPages; i++) {
                 String repositoriesUrlWithPages = String.format("https://api.github.com/users/%s/repos?page=%o&per_page=100", githubUserName, i);
-
                 HttpResponse<String> response = getResponseFromLink(repositoriesUrlWithPages);
 
                 List<RepositoryData> repositoriesData = this.mapper.readValue(response.body(), new TypeReference<>() {
