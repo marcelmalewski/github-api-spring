@@ -17,10 +17,11 @@ public abstract class GithubService {
     protected final ObjectMapper mapper = new ObjectMapper()
             .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
+    //moge zrobic z tego abstract method
     protected HttpResponse<String> getResponseFromLink(String url) throws URISyntaxException, IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
-                .header("Accept", "application/vnd.github.v3+json")
+                .headers("Accept", "application/vnd.github.v3+json", "Authorization", "Bearer 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")
                 .uri(new URI(url))
                 .build();
         HttpResponse<String> response = this.client.send(request, HttpResponse.BodyHandlers.ofString());
@@ -29,6 +30,12 @@ public abstract class GithubService {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND,
                     "GithubUser not found"
+            );
+        }
+        else if(response.statusCode() == 403) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    "API Rate limit exceeded"
             );
         }
         return response;
