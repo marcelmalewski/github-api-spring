@@ -8,9 +8,8 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
-@RequestMapping(path="api/repositoryData/{githubUserName}")
+@RequestMapping(path="api/repositoriesData/{githubUserName}")
 public class RepositoryDataController {
-
     private final RepositoryDataService repositoryDataService;
 
     @Autowired
@@ -20,7 +19,7 @@ public class RepositoryDataController {
 
     @GetMapping
     @ResponseBody
-    public List<RepositoryDataWithLanguages> getRepositoriesDataOfGithubUser(@PathVariable String githubUserName) throws URISyntaxException, IOException, InterruptedException {
+    public List<RepositoryData> getRepositoriesDataOfGithubUser(@PathVariable String githubUserName) throws URISyntaxException, IOException, InterruptedException {
         return repositoryDataService.getRepositoriesDataOfGithubUser(githubUserName);
     }
 }
