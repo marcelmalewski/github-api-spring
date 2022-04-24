@@ -20,6 +20,11 @@ I used Java with Spring.
 Both end points extends from class "GithubService".
 In this class are implemented two class variables and one method that are used in both end points.
 Thanks to that i have less code.  
+
+* **Testing:**  
+  I created github account with some repostirories.  
+  Thanks to that i can test my application on github user which will never change.  
+
 ### How to install:
 ...
 
