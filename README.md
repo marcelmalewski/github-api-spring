@@ -1,4 +1,5 @@
-![](https://github.com/marcelmalewski/allegro-summer-experience-2022/workflows/maven.yml/badge.svg)
+[![Java CI with Maven](https://github.com/marcelmalewski/allegro-summer-experience-2022/actions/workflows/maven.yml/badge.svg?branch=main)](https://github.com/marcelmalewski/allegro-summer-experience-2022/actions/workflows/maven.yml)
+
 # allegro-summer-experience-2022
 My email in recruitment process: mmalewski9@gmail.com
 ---
