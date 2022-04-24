@@ -13,7 +13,7 @@ I used Java with Spring.
   Then i manually refill languages.
   
 * **Second endpoint:**  
-  (User data)
+  (User data)  
   I use function from first endpoint to get all repositories of user so i have to write less code.
   Then i use on this result another method that will get aggregated languages by bytes so there is less code i one method.
 
