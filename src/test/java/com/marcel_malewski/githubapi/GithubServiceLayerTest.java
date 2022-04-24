@@ -22,7 +22,7 @@ class GithubServiceLayerTest {
     }
 
     @Test
-    void getUserNotFoundWhenUserNotFound() {
+    void getUserNotFoundWhenUserDontExist() {
         GithubServiceLayer githubServiceLayer = new GithubServiceLayer();
 
         Exception exception = assertThrows(ResponseStatusException.class, () -> {

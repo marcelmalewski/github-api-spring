@@ -33,7 +33,7 @@ class RepositoryDataControllerTest {
     private RepositoryDataService repositoryDataService;
 
     @Test
-    void getRepositoriesDataOfGithubUserWithUserExists() throws Exception {
+    void testIfEndpointWorksWhenUserExists() throws Exception {
         List<RepositoryData> returnFromGetRepositoriesDataOfGithubUser = new ArrayList<>() {{
             add(new RepositoryData("Go", Map.of("Go", 16974)));
             add(new RepositoryData("Java", Map.of("Java", 10868)));

@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class RepositoryDataServiceTest {
 
     @Test
-    void getRepositoriesDataOfGithubUserWhenUserExists() throws IOException, URISyntaxException, InterruptedException {
+    void testIfDataIsReturnedWhenUserExists() throws IOException, URISyntaxException, InterruptedException {
         RepositoryDataService repositoryDataService = new RepositoryDataService();
 
         List<RepositoryData> result = repositoryDataService.getRepositoriesDataOfGithubUser("HoddityH");

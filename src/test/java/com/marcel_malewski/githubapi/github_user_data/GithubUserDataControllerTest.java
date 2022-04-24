@@ -30,7 +30,7 @@ class GithubUserDataControllerTest {
     private GithubUserDataService githubUserDataService;
 
     @Test
-    void getGithubUserData() throws Exception {
+    void testIfEndpointWorksWhenUserExists() throws Exception {
         GithubUserData returnFromGetGithubUserData =
                 new GithubUserData("HoddityH", "Testy", null, null);
 
