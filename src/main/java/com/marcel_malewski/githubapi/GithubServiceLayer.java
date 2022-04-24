@@ -31,13 +31,6 @@ public class GithubServiceLayer {
                     "GithubUser not found"
             );
         }
-        //handle API Rate limit exceeded
-        else if(response.statusCode() == 403) {
-            throw new ResponseStatusException(
-                    HttpStatus.TOO_MANY_REQUESTS,
-                    "API Rate limit exceeded"
-            );
-        }
         return response;
     }
 }

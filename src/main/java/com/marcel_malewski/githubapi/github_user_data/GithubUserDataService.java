@@ -48,7 +48,7 @@ public class GithubUserDataService extends GithubServiceLayer {
         //Now with our link and githubUserName get response with user data
         HttpResponse<String> response = this.getResponseFromLink(githubUserUrl);
         //get repositories of user
-        List<RepositoryData> repositoriesData = repositoryDataService.getRepositoriesDataOfGithubUser(githubUserName);
+        List<RepositoryData> repositoriesData = this.repositoryDataService.getRepositoriesDataOfGithubUser(githubUserName);
         //aggregate languages in repositories by bytes
         Map<String, Integer> allLanguages = aggregateLanguagesByBytes(repositoriesData);
 
