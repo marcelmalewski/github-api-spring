@@ -46,7 +46,7 @@ public class GithubUserDataService extends GithubService {
     public GithubUserData getGithubUserData(String githubUserName) throws IOException, InterruptedException, URISyntaxException {
         String githubUserUrl = String.format("https://api.github.com/users/%s", githubUserName);
         //Now with our link and githubUserName get response with user data
-        HttpResponse<String> response = getResponseFromLink(githubUserUrl);
+        HttpResponse<String> response = this.getResponseFromLink(githubUserUrl);
         //get repositories of user
         List<RepositoryData> repositoriesData = repositoryDataService.getRepositoriesDataOfGithubUser(githubUserName);
         //aggregate languages in repositories by bytes
