@@ -17,7 +17,7 @@ I used Java with Spring.
   I use function from first endpoint to get all repositories of user so i have to write less code.
   Then i use on this result another method that will get aggregated languages by bytes so there is less code i one method.
 
-Both end points extends from abstract class "GithubService".
+Both end points extends from class "GithubService".
 In this class are implemented two class variables and one method that are used in both end points.
 Thanks to that i have less code.  
 ### How to install:
