@@ -12,4 +12,11 @@ import java.util.Map;
 public class RepositoryData {
     private String name;
     private Map<String, Integer> languages;
+
+    public RepositoryData(String name, Map<String, Integer> languages) {
+        this.name = name;
+        this.languages = languages;
+    }
+
+    public RepositoryData() {}
 }
