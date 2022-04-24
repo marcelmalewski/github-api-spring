@@ -1,3 +1,4 @@
+![](https://github.com/marcelmalewski/allegro-summer-experience-2022/workflows/maven.yml/badge.svg)
 # allegro-summer-experience-2022
 My email in recruitment process: mmalewski9@gmail.com
 ---
@@ -13,13 +14,18 @@ I used Java with Spring.
   Then i manually refill languages.
   
 * **Second endpoint:**  
-  (User data)
+  (User data)  
   I use function from first endpoint to get all repositories of user so i have to write less code.
   Then i use on this result another method that will get aggregated languages by bytes so there is less code i one method.
 
 Both end points extends from class "GithubService".
 In this class are implemented two class variables and one method that are used in both end points.
 Thanks to that i have less code.  
+
+* **Testing:**  
+  I created github account with some repostirories.  
+  Thanks to that i can test my application on github user which will never change.  
+
 ### How to install:
 ...
 
