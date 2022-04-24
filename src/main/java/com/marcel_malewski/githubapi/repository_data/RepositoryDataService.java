@@ -1,7 +1,7 @@
 package com.marcel_malewski.githubapi.repository_data;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.marcel_malewski.githubapi.GithubService;
+import com.marcel_malewski.githubapi.GithubServiceLayer;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class RepositoryDataService extends GithubService {
+public class RepositoryDataService extends GithubServiceLayer {
     private List<RepositoryData> addLanguagesToRepositoriesData(List<RepositoryData> repositoriesData, String githubUserName) {
         repositoriesData.forEach(repositoryData -> {
             String repoLanguagesUrl = String.format("https://api.github.com/repos/%s/%s/languages", githubUserName, repositoryData.getName());

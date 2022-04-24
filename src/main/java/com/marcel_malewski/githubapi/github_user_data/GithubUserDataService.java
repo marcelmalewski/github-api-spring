@@ -1,6 +1,6 @@
 package com.marcel_malewski.githubapi.github_user_data;
 
-import com.marcel_malewski.githubapi.GithubService;
+import com.marcel_malewski.githubapi.GithubServiceLayer;
 import com.marcel_malewski.githubapi.repository_data.RepositoryData;
 import com.marcel_malewski.githubapi.repository_data.RepositoryDataService;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class GithubUserDataService extends GithubService {
+public class GithubUserDataService extends GithubServiceLayer {
     private final RepositoryDataService repositoryDataService;
 
     public GithubUserDataService(RepositoryDataService repositoryDataService) {

@@ -24,10 +24,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-//@ExtendWith(SpringRunner.class)
-//@WebMvcTest(RepositoryDataController.class)
-//@WebMvcTest
-//@ContextConfiguration(classes=GithubApiApplication.class)
 class RepositoryDataControllerTest {
 
     @Autowired
