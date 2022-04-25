@@ -1,8 +1,8 @@
-package com.marcel_malewski.githubapi.github_user_data;
+package com.marcel_malewski.githubApi.github_user_data;
 
-import com.marcel_malewski.githubapi.GithubServiceLayer;
-import com.marcel_malewski.githubapi.repository_data.RepositoryData;
-import com.marcel_malewski.githubapi.repository_data.RepositoryDataService;
+import com.marcel_malewski.githubApi.GithubServiceLayer;
+import com.marcel_malewski.githubApi.repository_data.RepositoryData;
+import com.marcel_malewski.githubApi.repository_data.RepositoryDataService;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
