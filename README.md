@@ -1,4 +1,4 @@
-[![Java CI with Maven](https://github.com/marcelmalewski/allegro-summer-experience-2022/actions/workflows/maven.yml/badge.svg?branch=main)](https://github.com/marcelmalewski/allegro-summer-experience-2022/actions/workflows/maven.yml)
+[![Java CI](https://github.com/marcelmalewski/allegro-summer-experience-2022/actions/workflows/gradle.yml/badge.svg)](https://github.com/marcelmalewski/allegro-summer-experience-2022/actions/workflows/gradle.yml)
 
 # allegro-summer-experience-2022
 My email in recruitment process: mmalewski9@gmail.com
@@ -25,7 +25,8 @@ Thanks to that i have less code.
 
 * **Testing:**  
   I created github account with some repostirories.  
-  Thanks to that i can test my application on github user which will never change.  
+  Thanks to that i can test my application on github user who will never change.  
+  Also i used github actions to test my application in cloud.  
 
 ### How to install:
 ...
