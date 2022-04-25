@@ -1,7 +1,7 @@
-package com.marcel_malewski.githubapi.repository_data;
+package com.marcel_malewski.githubApi.repository_data;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.marcel_malewski.githubapi.GithubServiceLayer;
+import com.marcel_malewski.githubApi.GithubServiceLayer;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
