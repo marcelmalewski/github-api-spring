@@ -1,4 +1,4 @@
-package com.marcel_malewski.githubapi.repository_data;
+package com.marcel_malewski.githubApi.repository_data;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
