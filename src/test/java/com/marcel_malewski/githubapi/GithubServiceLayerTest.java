@@ -1,4 +1,4 @@
-package com.marcel_malewski.githubapi;
+package com.marcel_malewski.githubApi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.web.server.ResponseStatusException;
