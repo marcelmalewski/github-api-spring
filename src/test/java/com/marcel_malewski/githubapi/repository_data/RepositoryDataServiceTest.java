@@ -1,4 +1,4 @@
-package com.marcel_malewski.githubapi.repository_data;
+package com.marcel_malewski.githubApi.repository_data;
 
 import org.junit.jupiter.api.Test;
 
@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class RepositoryDataServiceTest {
 
