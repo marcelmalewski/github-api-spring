@@ -1,4 +1,4 @@
-package com.marcel_malewski.githubapi.github_user_data;
+package com.marcel_malewski.githubApi.github_user_data;
 
 import lombok.Getter;
 import lombok.Setter;

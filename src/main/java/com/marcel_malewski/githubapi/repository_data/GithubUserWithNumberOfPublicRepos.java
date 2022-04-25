@@ -1,4 +1,4 @@
-package com.marcel_malewski.githubapi.repository_data;
+package com.marcel_malewski.githubApi.repository_data;
 
 import lombok.Getter;
 import lombok.Setter;
