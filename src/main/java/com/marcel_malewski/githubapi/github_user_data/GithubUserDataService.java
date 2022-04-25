@@ -13,11 +13,12 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class GithubUserDataService extends GithubServiceLayer {
+public class GithubUserDataService {
     private final RepositoryDataService repositoryDataService;
-
-    public GithubUserDataService(RepositoryDataService repositoryDataService) {
+    private final GithubServiceLayer githubServiceLayer;
+    public GithubUserDataService(RepositoryDataService repositoryDataService, GithubServiceLayer githubServiceLayer) {
         this.repositoryDataService = repositoryDataService;
+        this.githubServiceLayer = githubServiceLayer;
     }
 
     private Map<String, Integer> aggregateLanguagesByBytes(List<RepositoryData> repositoriesData) {
@@ -46,13 +47,13 @@ public class GithubUserDataService extends GithubServiceLayer {
     public GithubUserData getGithubUserData(String githubUserName) throws IOException, InterruptedException, URISyntaxException {
         String githubUserUrl = String.format("https://api.github.com/users/%s", githubUserName);
         //Now with our link and githubUserName get response with user data
-        HttpResponse<String> response = this.getResponseFromLink(githubUserUrl);
+        HttpResponse<String> response = this.githubServiceLayer.getResponseFromLink(githubUserUrl);
         //get repositories of user
         List<RepositoryData> repositoriesData = this.repositoryDataService.getRepositoriesDataOfGithubUser(githubUserName);
         //aggregate languages in repositories by bytes
         Map<String, Integer> allLanguages = aggregateLanguagesByBytes(repositoriesData);
 
-        GithubUserData githubUserData = this.mapper.readValue(response.body(), GithubUserData.class);
+        GithubUserData githubUserData = this.githubServiceLayer.mapper.readValue(response.body(), GithubUserData.class);
         //refill languages with aggregated languages by bytes
         githubUserData.setLanguages(allLanguages);
 

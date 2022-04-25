@@ -3,6 +3,7 @@ package com.marcel_malewski.githubApi;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
@@ -12,12 +13,13 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
+@Component
 public class GithubServiceLayer {
     private final HttpClient client = HttpClient.newHttpClient();
-    protected final ObjectMapper mapper = new ObjectMapper()
+    public final ObjectMapper mapper = new ObjectMapper()
             .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-    protected HttpResponse<String> getResponseFromLink(String url) throws URISyntaxException, IOException, InterruptedException {
+    public HttpResponse<String> getResponseFromLink(String url) throws URISyntaxException, IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
                 .headers("Accept", "application/vnd.github.v3+json", "Authorization", "Bearer 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")
