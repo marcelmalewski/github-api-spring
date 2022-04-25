@@ -1,4 +1,4 @@
-package com.marcel_malewski.githubapi;
+package com.marcel_malewski.githubApi;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
