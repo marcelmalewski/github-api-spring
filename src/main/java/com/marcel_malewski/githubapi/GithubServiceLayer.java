@@ -22,7 +22,7 @@ public class GithubServiceLayer {
     public HttpResponse<String> getResponseFromLink(String url) throws URISyntaxException, IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
-                .headers("Accept", "application/vnd.github.v3+json", "Authorization", "Bearer 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")
+                .header("Accept", "application/vnd.github.v3+json")
                 .uri(new URI(url))
                 .build();
         HttpResponse<String> response = this.client.send(request, HttpResponse.BodyHandlers.ofString());
