@@ -3,11 +3,11 @@
 # Github API
 
 ## Endpoints
-### 1 endpoint
+### Endpoint nr. 1
 Return list of repositories of a given user along with information about programming languages used in repository
 (language name, number of bytes of code in a given language).
 
-### 2 endpoint
+### Endpoint nr. 2
 Return user data (login, name, bio) with aggregated information about languages
 programming used in its repositories (language name, number of bytes of code in a given language).
 
